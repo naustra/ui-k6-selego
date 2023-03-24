@@ -1,17 +1,19 @@
 <html>
   <head>
-    <title>example xk6-dashboard UI</title>
+    <title>k6 dashboard</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.12/dist/uPlot.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
   </head>
   <body onload="M.AutoInit();">
     <div class="navbar-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a class="brand-logo center">example xk6-dashboard UI</a>
+          <a class="brand-logo center">k6 dashboard</a>
         </div>
       </nav>
     </div>
@@ -24,7 +26,9 @@
       import { SampleSource, SimpleChart } from "./index.js";
 
       addEventListener("DOMContentLoaded", () => {
-        const endpoint = new URLSearchParams(window.location.search).get("endpoint") || "/";
+        const endpoint =
+          new URLSearchParams(window.location.search).get("endpoint") ||
+          "http://127.0.0.1:5665/";
         const src = new SampleSource(`${endpoint}events/sample`);
         new SimpleChart(src, { title: "Virtual Users" }, "vus");
         new SimpleChart(
@@ -32,9 +36,22 @@
           { title: "Request Duration (ms)" },
           "http_req_duration_95",
           "http_req_duration_90",
-          "http_req_duration_50",
-          "http_req_duration_current"
+          "http_req_duration_50"
         );
+        new SimpleChart(
+          src,
+          { title: "Websocket data (ms)" },
+          "ws_connecting_50",
+          "ws_connecting_90",
+          "ws_connecting_95"
+        );
+        new SimpleChart(
+          src,
+          { title: "Message sent/received" },
+          "ws_msgs_received",
+          "ws_msgs_sent"
+        );
+        new SimpleChart(src, { title: "Websocket sessions" }, "ws_sessions");
         new SimpleChart(src, { title: "Request Rate (1/s)" }, "http_reqs_rate");
       });
     </script>

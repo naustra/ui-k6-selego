@@ -1,5 +1,14 @@
 import uPlot from "https://cdn.jsdelivr.net/npm/uplot@1.6.12/dist/uPlot.esm.min.js";
 
+if (document) {
+  document
+    .getElementsByTagName("head")[0]
+    .insertAdjacentHTML(
+      "beforeend",
+      '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.12/dist/uPlot.min.css" />'
+    );
+}
+
 export const palette = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666"];
 
 export class SampleSource extends EventSource {
