@@ -1,3 +1,3 @@
-module github.com/szkiba/xk6-dashboard-ui-tmpl
+module github.com/naustra/ui-k6-selego
 
 go 1.18
